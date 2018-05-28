@@ -1,0 +1,91 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-allopen'
+apply plugin: 'realm-android'
+
+android {
+    compileSdkVersion build_versions.compileSdk
+    buildToolsVersion build_versions.build_tool
+    defaultConfig {
+        minSdkVersion build_versions.minSdk
+        targetSdkVersion build_versions.targetSdk
+        versionCode build_versions.versionCode
+        versionName build_versions.versionName
+    }
+    signingConfigs {
+        Key {
+            try {
+                storeFile file(key_store.keystore)
+                storePassword key_store.keystorePass
+                keyAlias key_store.alias
+                keyPassword key_store.aliasPass
+            }
+            catch (ignored) {
+                throw new InvalidUserDataException("You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
+            }
+        }
+    }
+    kapt {
+        correctErrorTypes = true
+    }
+    buildTypes {
+        debug {
+            debuggable true
+        }
+        release {
+            signingConfig signingConfigs.Key
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                    key_store.proguard_rules, key_store.proguard_rx, key_store.proguard_square, key_store.proguard_support
+        }
+    }
+    dexOptions {
+        preDexLibraries true
+        javaMaxHeapSize "8g"
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    // Kotlin
+    implementation deps.kotlin.stdlib
+    // Support libraries
+    for (dependency in deps.support) {
+        implementation dependency.value
+    }
+    //Core
+    for (dependency in deps.core) {
+        implementation dependency.value
+    }
+    //Utils
+    for (dependency in deps.utils) {
+        implementation dependency.value
+    }
+    //Image Loading
+    for (dependency in deps.glide) {
+        implementation dependency.value
+    }
+    // Architecture components
+    for (dependency in deps.lifecycle) {
+        implementation dependency.value
+    }
+    //Retrofit
+    for (dependency in deps.retrofit) {
+        implementation dependency.value
+    }
+    // Dagger 2
+    for (dependency in deps.dagger) {
+        implementation dependency.value
+    }
+    // Test
+    implementation deps.test.leakcanary
+    releaseImplementation deps.test.leakcanary_no_op
+    testImplementation deps.test.leakcanary_no_op
+    implementation deps.test.blockDebug
+    releaseImplementation deps.test.blockRelease
+}
+

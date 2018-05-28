@@ -1,0 +1,249 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-allopen'
+apply plugin: 'realm-android'
+apply plugin: 'androidx.navigation.safeargs'
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+android {
+    compileSdkVersion build_versions.compileSdk
+    buildToolsVersion build_versions.build_tool
+    defaultConfig {
+        applicationId build_versions.app_id
+        minSdkVersion build_versions.minSdk
+        targetSdkVersion build_versions.targetSdk
+        versionCode build_versions.versionCode
+        versionName build_versions.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        //multiDexEnabled true
+        sourceSets.main {
+            jniLibs.srcDir 'src/main/libs'
+            jni.srcDirs = []
+        }
+    }
+
+    if(projects.hasProperty('devBuild')){
+        splits.splits.abi.enable = false
+        splits.splits.density.enable = false
+        splits.aaptOptions.cruncherEnabled =false
+    }
+
+    signingConfigs {
+        Key {
+            try {
+                storeFile file(key_store.keystore)
+                storePassword key_store.keystorePass
+                keyAlias key_store.alias
+                keyPassword key_store.aliasPass
+            }
+            catch (ignored) {
+                throw new InvalidUserDataException("You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+        }
+        release {
+            signingConfig signingConfigs.Key
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                    key_store.proguard_rules, key_store.proguard_rx, key_store.proguard_square, key_store.proguard_support
+        }
+    }
+
+    flavorDimensions "content"
+    productFlavors {
+        uHotelDev {
+            minSdkVersion build_versions.min_sdk
+            buildConfigField "String", "ACUCORE_PATH", '"http://lv-api-dev.acuteksolutions.com/"'
+            buildConfigField "String", "WEB_SOCKET_PATH", '"ws://lv-acutool.acuteksolutions.com/devices/dcs"'
+            buildConfigField "String", "RSS_URL", '"http://lv-acutool.acuteksolutions.com/rssfeedserver/"'
+            buildConfigField "String", "DTV_DB_URL", '"http://tuk-apk.acuteksolutions.com/bulktv/release/db_debug.xml"'
+            buildConfigField "String", "MOVIES_IMAGE_PATH", '"http://lv-bsdev.acuteksolutions.com"'
+            buildConfigField "String", "VOD_IMAGE_URL", '"http://bsdev.acuteksolutions.com/restapi/rest/{regionId}/images/"'
+            buildConfigField "String", "APP_UPDATE_URL", '"http://tuk-apk.acuteksolutions.com/bulktv/release/update_debug.xml"'
+            buildConfigField "String", "STREAM_APP_UPDATE_URL", '"http://tuk-apk.acuteksolutions.com/bulktv/stage/stream/%1$s"'
+            buildConfigField "String", "VAST_URL_SPOTX", '"http://search.spotxchange.com/vast/2.0/208097?VPI=MP4&app[bundle]=com.bulzihost.bulziTV&player_height=360&player_width=640&device[devicetype]=7&device[make]=Acutek%20Solutions%20UHotel%20Platform&device[model]=ATS-9010WQP&app[name]=uAD&ip_addr=REPLACE_ME&operator=hyve&provider=cox&deviceid=REPLACE_ME&locationid=REPLACE_ME"'
+            buildConfigField "String", "VAST_URL", '"http://lv-uads.acuteksolutions.com/uads/www/delivery/fc.php?script=bannerTypeHtml:vastInlineBannerTypeHtml:vastInlineHtml&zones=preroll:0.0-0%3D1&nz=1&source=&r=R0.05822725687175989&block=1&format=vast2&charset=UTF-8"'
+            buildConfigField "String", "PMS_URL", '"http://lv-api.acuteksolutions.com"'
+            manifestPlaceholders = [sharedUserId:"com.acuteksolution.anyname"]
+            dimension "content"
+        }
+        uHotelDemo {
+            buildConfigField "String", "ACUCORE_PATH", '"http://lv-api-dev.acuteksolutions.com/"'
+            buildConfigField "String", "WEB_SOCKET_PATH", '"ws://lv-acutool.acuteksolutions.com/devices/dcs"'
+            buildConfigField "String", "RSS_URL", '"http://lv-acutool.acuteksolutions.com/rssfeedserver/"'
+            buildConfigField "String", "DTV_DB_URL", '"http://tuk-apk.acuteksolutions.com/bulktv/release/db_debug.xml"'
+            buildConfigField "String", "MOVIES_IMAGE_PATH", '"http://lv-bsdev.acuteksolutions.com"'
+            buildConfigField "String", "VOD_IMAGE_URL", '"http://bsdev.acuteksolutions.com/restapi/rest/{regionId}/images/"'
+            buildConfigField "String", "APP_UPDATE_URL", '"http://tuk-apk.acuteksolutions.com/bulktv/release/update_debug.xml"'
+            buildConfigField "String", "STREAM_APP_UPDATE_URL", '"http://tuk-apk.acuteksolutions.com/bulktv/stage/stream/%1$s"'
+            buildConfigField "String", "VAST_URL_SPOTX", '"http://search.spotxchange.com/vast/2.0/208097?VPI=MP4&app[bundle]=com.bulzihost.bulziTV&player_height=360&player_width=640&device[devicetype]=7&device[make]=Acutek%20Solutions%20UHotel%20Platform&device[model]=ATS-9010WQP&app[name]=uAD&ip_addr=REPLACE_ME&operator=hyve&provider=cox&deviceid=REPLACE_ME&locationid=REPLACE_ME"'
+            buildConfigField "String", "VAST_URL", '"http://lv-uads.acuteksolutions.com/uads/www/delivery/fc.php?script=bannerTypeHtml:vastInlineBannerTypeHtml:vastInlineHtml&zones=preroll:0.0-0%3D1&nz=1&source=&r=R0.05822725687175989&block=1&format=vast2&charset=UTF-8"'
+            buildConfigField "String", "PMS_URL", '"http://10.17.16.11:8181"'
+            manifestPlaceholders = [sharedUserId:"com.acuteksolution.anyname"]
+            dimension "content"
+        }
+        uHotelRelease {
+            buildConfigField "String", "ACUCORE_PATH", '"http://10.17.16.11:8181/"'
+            buildConfigField "String", "WEB_SOCKET_PATH", '"ws://10.17.16.12:8080/devices/dcs"'
+            buildConfigField "String", "RSS_URL", '"http://10.17.16.12:8080/rssfeedserver/"'
+            buildConfigField "String", "DTV_DB_URL", '"http://10.17.16.252/ota/bulktv/release/db_release.xml"'
+            buildConfigField "String", "MOVIES_IMAGE_PATH", '""'
+            buildConfigField "String", "VOD_IMAGE_URL", '"http://10.17.16.10/restapi/rest/{regionId}/images/"'
+            buildConfigField "String", "APP_UPDATE_URL", '"http://10.17.16.252/ota/uHotel/release/update_release.xml"'
+            buildConfigField "String", "STREAM_APP_UPDATE_URL", '"http://10.17.16.252/streaming_apk/%1$s"'
+            buildConfigField "String", "VAST_URL_SPOTX", '"http://lv-uads.acuteksolutions.com/uads/www/delivery/fc.php?script=bannerTypeHtml:vastInlineBannerTypeHtml:vastInlineHtml&zones=preroll:0.0-0%3D1&nz=1&source=&r=R0.05822725687175989&block=1&format=vast2&charset=UTF-8"'
+            buildConfigField "String", "VAST_URL", '"http://lv-uads.acuteksolutions.com/uads/www/delivery/fc.php?script=bannerTypeHtml:vastInlineBannerTypeHtml:vastInlineHtml&zones=preroll:0.0-0%3D1&nz=1&source=&r=R0.05822725687175989&block=1&format=vast2&charset=UTF-8"'
+            buildConfigField "String", "PMS_URL", '"http://10.17.16.11:8181"'
+            manifestPlaceholders = [sharedUserId:"android.uid.system"]
+            dimension "content"
+        }
+    }
+
+    lintOptions {
+        textOutput "stdout"
+        textReport true
+        checkAllWarnings true
+        warningsAsErrors true
+        showAll true
+        explainIssues true
+        abortOnError false
+        lintConfig file("$projectDir/lint.xml")
+    }
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/license/LICENSE.base64.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/rxjava.properties'
+        exclude 'META-INF/MANIFEST.MF'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    dexOptions {
+        maxProcessCount 4
+        preDexLibraries false
+        javaMaxHeapSize "8g"
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def fileName = "uHotel_v${defaultConfig.versionName}_${getDate()}.apk"
+                outputFileName = fileName
+            }
+        }
+    }
+    sourceSets {
+        main {
+            res.srcDirs = [
+                    'src/main/res-main',
+                    file('src/main/res-screen')
+                            .listFiles()
+                            .each { res.srcDirs += it.path }
+            ]
+        }
+    }
+    androidExtensions {
+        experimental = true
+    }
+    realm {
+        kotlinExtensionsEnabled = true
+    }
+    dataBinding {
+        enabled = true
+    }
+    task ndkBuild(type: Exec) {
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        def ndkDir = properties.getProperty('ndk.dir')
+        commandLine "$ndkDir/ndk-build", '-B', '-C', file('src/main/jni').absolutePath
+    }
+    configurations.all {
+        resolutionStrategy {
+            force 'com.android.support:support-vector-drawable:25.0.0'
+        }}
+}
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':Core')
+    // Kotlin
+    implementation deps.kotlin.stdlib
+    //Core
+    for (dependency in deps.core) {
+        implementation dependency.value
+    }
+    // Architecture components
+    for (dependency in deps.lifecycle) {
+        implementation dependency.value
+    }
+    // Dagger 2
+    for (dependency in deps.dagger) {
+        implementation dependency.value
+    }
+    // Navigation
+    for (dependency in deps.navigation) {
+        implementation dependency.value
+    }
+    //Compiler
+    for (dependency in deps.compiler) {
+        kapt dependency.value
+    }
+    //Retrofit
+    for (dependency in deps.retrofit) {
+        implementation dependency.value
+    }
+    implementation (deps.libCore.ok_httpLogging,{
+        exclude group: 'org.json', module: 'json'
+    })
+    implementation (deps.libCore.glide_recycler,{
+        transitive = false
+    })
+    //Image Loading
+    for (dependency in deps.glide) {
+        implementation dependency.value
+    }
+    //Utils
+    for (dependency in deps.utils) {
+        implementation dependency.value
+    }
+    //Library
+    for (dependency in deps.library) {
+        implementation dependency.value
+    }
+    // Test
+    //implementation deps.multidex
+    implementation deps.test.leakcanary
+    releaseImplementation deps.test.leakcanary_no_op
+    testImplementation deps.test.leakcanary_no_op
+    implementation deps.test.blockDebug
+    releaseImplementation deps.test.blockRelease
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
+}
+
+@SuppressWarnings("GrMethodMayBeStatic")
+def getDate() {
+    new Date().format('MMddyyyy')
+}
