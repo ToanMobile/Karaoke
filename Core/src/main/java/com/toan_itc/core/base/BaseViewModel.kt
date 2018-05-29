@@ -1,7 +1,5 @@
 package com.toan_itc.core.base
 
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.orhanobut.logger.Logger
 import com.toan_itc.core.base.event.Event

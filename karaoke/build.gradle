@@ -3,8 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-allopen'
-apply plugin: 'realm-android'
-apply plugin: 'androidx.navigation.safeargs'
+//apply plugin: 'androidx.navigation.safeargs'
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
@@ -20,7 +19,6 @@ android {
         versionName build_versions.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
-        //multiDexEnabled true
         sourceSets.main {
             jniLibs.srcDir 'src/main/libs'
             jni.srcDirs = []
@@ -64,48 +62,21 @@ android {
     productFlavors {
         uHotelDev {
             minSdkVersion build_versions.min_sdk
-            buildConfigField "String", "ACUCORE_PATH", '"http://lv-api-dev.acuteksolutions.com/"'
-            buildConfigField "String", "WEB_SOCKET_PATH", '"ws://lv-acutool.acuteksolutions.com/devices/dcs"'
-            buildConfigField "String", "RSS_URL", '"http://lv-acutool.acuteksolutions.com/rssfeedserver/"'
-            buildConfigField "String", "DTV_DB_URL", '"http://tuk-apk.acuteksolutions.com/bulktv/release/db_debug.xml"'
-            buildConfigField "String", "MOVIES_IMAGE_PATH", '"http://lv-bsdev.acuteksolutions.com"'
-            buildConfigField "String", "VOD_IMAGE_URL", '"http://bsdev.acuteksolutions.com/restapi/rest/{regionId}/images/"'
-            buildConfigField "String", "APP_UPDATE_URL", '"http://tuk-apk.acuteksolutions.com/bulktv/release/update_debug.xml"'
-            buildConfigField "String", "STREAM_APP_UPDATE_URL", '"http://tuk-apk.acuteksolutions.com/bulktv/stage/stream/%1$s"'
-            buildConfigField "String", "VAST_URL_SPOTX", '"http://search.spotxchange.com/vast/2.0/208097?VPI=MP4&app[bundle]=com.bulzihost.bulziTV&player_height=360&player_width=640&device[devicetype]=7&device[make]=Acutek%20Solutions%20UHotel%20Platform&device[model]=ATS-9010WQP&app[name]=uAD&ip_addr=REPLACE_ME&operator=hyve&provider=cox&deviceid=REPLACE_ME&locationid=REPLACE_ME"'
-            buildConfigField "String", "VAST_URL", '"http://lv-uads.acuteksolutions.com/uads/www/delivery/fc.php?script=bannerTypeHtml:vastInlineBannerTypeHtml:vastInlineHtml&zones=preroll:0.0-0%3D1&nz=1&source=&r=R0.05822725687175989&block=1&format=vast2&charset=UTF-8"'
-            buildConfigField "String", "PMS_URL", '"http://lv-api.acuteksolutions.com"'
-            manifestPlaceholders = [sharedUserId:"com.acuteksolution.anyname"]
-            dimension "content"
-        }
-        uHotelDemo {
-            buildConfigField "String", "ACUCORE_PATH", '"http://lv-api-dev.acuteksolutions.com/"'
-            buildConfigField "String", "WEB_SOCKET_PATH", '"ws://lv-acutool.acuteksolutions.com/devices/dcs"'
-            buildConfigField "String", "RSS_URL", '"http://lv-acutool.acuteksolutions.com/rssfeedserver/"'
-            buildConfigField "String", "DTV_DB_URL", '"http://tuk-apk.acuteksolutions.com/bulktv/release/db_debug.xml"'
-            buildConfigField "String", "MOVIES_IMAGE_PATH", '"http://lv-bsdev.acuteksolutions.com"'
-            buildConfigField "String", "VOD_IMAGE_URL", '"http://bsdev.acuteksolutions.com/restapi/rest/{regionId}/images/"'
-            buildConfigField "String", "APP_UPDATE_URL", '"http://tuk-apk.acuteksolutions.com/bulktv/release/update_debug.xml"'
-            buildConfigField "String", "STREAM_APP_UPDATE_URL", '"http://tuk-apk.acuteksolutions.com/bulktv/stage/stream/%1$s"'
-            buildConfigField "String", "VAST_URL_SPOTX", '"http://search.spotxchange.com/vast/2.0/208097?VPI=MP4&app[bundle]=com.bulzihost.bulziTV&player_height=360&player_width=640&device[devicetype]=7&device[make]=Acutek%20Solutions%20UHotel%20Platform&device[model]=ATS-9010WQP&app[name]=uAD&ip_addr=REPLACE_ME&operator=hyve&provider=cox&deviceid=REPLACE_ME&locationid=REPLACE_ME"'
-            buildConfigField "String", "VAST_URL", '"http://lv-uads.acuteksolutions.com/uads/www/delivery/fc.php?script=bannerTypeHtml:vastInlineBannerTypeHtml:vastInlineHtml&zones=preroll:0.0-0%3D1&nz=1&source=&r=R0.05822725687175989&block=1&format=vast2&charset=UTF-8"'
-            buildConfigField "String", "PMS_URL", '"http://10.17.16.11:8181"'
-            manifestPlaceholders = [sharedUserId:"com.acuteksolution.anyname"]
+            buildConfigField "String", "BASE_URL", '"https://skymusic.com.vn/api/"'
+            buildConfigField "String", "HOST", '"identify-ap-southeast-1.acrcloud.com"'
+            buildConfigField "String", "ACCESS_KEY", '"c5f8665809ec9f785424fb1b837ac283"'
+            buildConfigField "String", "ACCESS_SECRET", '"JOfSDjCUb7ITdQK9JHykSVIqPmJeFM3RLc6RgSzY"'
+            buildConfigField "String", "CLIENT_KEY", '"kct171101"'
+            buildConfigField "String", "CLIENT_SECRET", '"e4d5962539f7a6fa691e1cfb81b73cf3"'
             dimension "content"
         }
         uHotelRelease {
-            buildConfigField "String", "ACUCORE_PATH", '"http://10.17.16.11:8181/"'
-            buildConfigField "String", "WEB_SOCKET_PATH", '"ws://10.17.16.12:8080/devices/dcs"'
-            buildConfigField "String", "RSS_URL", '"http://10.17.16.12:8080/rssfeedserver/"'
-            buildConfigField "String", "DTV_DB_URL", '"http://10.17.16.252/ota/bulktv/release/db_release.xml"'
-            buildConfigField "String", "MOVIES_IMAGE_PATH", '""'
-            buildConfigField "String", "VOD_IMAGE_URL", '"http://10.17.16.10/restapi/rest/{regionId}/images/"'
-            buildConfigField "String", "APP_UPDATE_URL", '"http://10.17.16.252/ota/uHotel/release/update_release.xml"'
-            buildConfigField "String", "STREAM_APP_UPDATE_URL", '"http://10.17.16.252/streaming_apk/%1$s"'
-            buildConfigField "String", "VAST_URL_SPOTX", '"http://lv-uads.acuteksolutions.com/uads/www/delivery/fc.php?script=bannerTypeHtml:vastInlineBannerTypeHtml:vastInlineHtml&zones=preroll:0.0-0%3D1&nz=1&source=&r=R0.05822725687175989&block=1&format=vast2&charset=UTF-8"'
-            buildConfigField "String", "VAST_URL", '"http://lv-uads.acuteksolutions.com/uads/www/delivery/fc.php?script=bannerTypeHtml:vastInlineBannerTypeHtml:vastInlineHtml&zones=preroll:0.0-0%3D1&nz=1&source=&r=R0.05822725687175989&block=1&format=vast2&charset=UTF-8"'
-            buildConfigField "String", "PMS_URL", '"http://10.17.16.11:8181"'
-            manifestPlaceholders = [sharedUserId:"android.uid.system"]
+            buildConfigField "String", "BASE_URL", '"https://skymusic.com.vn/api/"'
+            buildConfigField "String", "HOST", '"identify-ap-southeast-1.acrcloud.com"'
+            buildConfigField "String", "ACCESS_KEY", '"c5f8665809ec9f785424fb1b837ac283"'
+            buildConfigField "String", "ACCESS_SECRET", '"JOfSDjCUb7ITdQK9JHykSVIqPmJeFM3RLc6RgSzY"'
+            buildConfigField "String", "CLIENT_KEY", '"kct171101"'
+            buildConfigField "String", "CLIENT_SECRET", '"e4d5962539f7a6fa691e1cfb81b73cf3"'
             dimension "content"
         }
     }
@@ -142,7 +113,7 @@ android {
         variant.outputs.all { output ->
             def outputFile = output.outputFile
             if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                def fileName = "uHotel_v${defaultConfig.versionName}_${getDate()}.apk"
+                def fileName = "karaoke_v${defaultConfig.versionName}_${getDate()}.apk"
                 outputFileName = fileName
             }
         }
@@ -160,9 +131,6 @@ android {
     androidExtensions {
         experimental = true
     }
-    realm {
-        kotlinExtensionsEnabled = true
-    }
     dataBinding {
         enabled = true
     }
@@ -171,10 +139,6 @@ android {
         def ndkDir = properties.getProperty('ndk.dir')
         commandLine "$ndkDir/ndk-build", '-B', '-C', file('src/main/jni').absolutePath
     }
-    configurations.all {
-        resolutionStrategy {
-            force 'com.android.support:support-vector-drawable:25.0.0'
-        }}
 }
 
 kotlin {
@@ -237,10 +201,6 @@ dependencies {
     testImplementation deps.test.leakcanary_no_op
     implementation deps.test.blockDebug
     releaseImplementation deps.test.blockRelease
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-}
-repositories {
-    mavenCentral()
 }
 
 @SuppressWarnings("GrMethodMayBeStatic")

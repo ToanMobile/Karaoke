@@ -6,12 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingComponent
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.toan_itc.core.architecture.AppExecutors
-import com.toan_itc.core.architecture.autoCleared
 import com.toan_itc.core.binding.FragmentDataBindingComponent
 import javax.inject.Inject
 

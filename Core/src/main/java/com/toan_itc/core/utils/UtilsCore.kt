@@ -2,9 +2,6 @@ package com.toan_itc.core.utils
 
 import android.view.View
 import androidx.core.view.isGone
-import org.joda.time.DateTime
-import org.joda.time.Days
-import org.joda.time.Interval
 import java.util.*
 
 /**
@@ -18,14 +15,6 @@ fun View.OnClickListener.listenToViews(vararg views: View) {
 
 fun hideView(vararg views: View){
     views.forEach { it.isGone = true }
-}
-
-//Date
-fun Date.isInPast(): Boolean = this.time < System.currentTimeMillis()
-
-fun Date.isToday(): Boolean {
-    val today = Interval(DateTime.now().withTimeAtStartOfDay(), Days.ONE)
-    return today.contains(this.time)
 }
 
 fun Date.isInFuture(): Boolean = this.time > System.currentTimeMillis()

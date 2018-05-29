@@ -5,11 +5,9 @@ buildscript {
     addRepos(repositories)
     dependencies {
         classpath deps.android_gradle_plugin
-        classpath deps.realm_plugin
         classpath deps.kotlin_plugin
         classpath deps.kotlin_allopen
-        classpath deps.safe_args_plugin
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        //classpath deps.safe_args_plugin
     }
     repositories {
         mavenCentral()
