@@ -60,6 +60,10 @@ dependencies {
     for (dependency in deps.core) {
         implementation dependency.value
     }
+    // Navigation
+    for (dependency in deps.navigation) {
+        implementation dependency.value
+    }
     //Utils
     for (dependency in deps.utils) {
         implementation dependency.value

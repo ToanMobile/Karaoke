@@ -105,6 +105,9 @@ def navigation = [:]
 navigation.runtime          = "android.arch.navigation:navigation-runtime:$versions.navigation"
 navigation.fragment         = "android.arch.navigation:navigation-fragment:$versions.navigation"
 navigation.ui               = "android.arch.navigation:navigation-ui:$versions.navigation"
+/*navigation.runtime          = "android.arch.navigation:navigation-runtime-ktx:$versions.navigation"
+navigation.fragment         = "android.arch.navigation:navigation-fragment-ktx:$versions.navigation"
+navigation.ui               = "android.arch.navigation:navigation-ui-ktx:$versions.navigation"*/
 deps.navigation = navigation
 
 def library = [:]

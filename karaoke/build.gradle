@@ -164,10 +164,6 @@ dependencies {
     for (dependency in deps.dagger) {
         implementation dependency.value
     }
-    // Navigation
-    for (dependency in deps.navigation) {
-        implementation dependency.value
-    }
     //Compiler
     for (dependency in deps.compiler) {
         kapt dependency.value

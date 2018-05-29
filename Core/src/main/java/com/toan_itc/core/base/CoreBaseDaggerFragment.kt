@@ -10,10 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.toan_itc.core.architecture.AppExecutors
+import com.toan_itc.core.base.di.Injectable
 import com.toan_itc.core.binding.FragmentDataBindingComponent
 import javax.inject.Inject
 
-abstract class CoreBaseDaggerFragment<VM : BaseViewModel> : Fragment(){
+abstract class CoreBaseDaggerFragment<VM : BaseViewModel> : Fragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject
@@ -26,19 +27,16 @@ abstract class CoreBaseDaggerFragment<VM : BaseViewModel> : Fragment(){
     abstract fun initData()
     abstract fun initView()
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this,viewModelFactory).get(getViewModel())
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         return inflater.inflate(setLayoutResourceID(), container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProviders.of(this,viewModelFactory).get(getViewModel())
         initView()
         initData()
     }
+
 }

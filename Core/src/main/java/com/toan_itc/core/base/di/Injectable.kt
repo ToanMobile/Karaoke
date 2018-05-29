@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package skymusic.com.vn.karaoke.di
+package com.toan_itc.core.base.di
 
 /**
  * Marks an activity / fragment injectable.
