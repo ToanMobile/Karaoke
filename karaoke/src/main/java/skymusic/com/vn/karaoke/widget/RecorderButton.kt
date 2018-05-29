@@ -9,7 +9,6 @@ import android.os.Message
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
-import androidx.appcompat.widget.AppCompatButton
 import skymusic.com.vn.karaoke.R
 import skymusic.com.vn.karaoke.utils.AudioRecordManager
 import skymusic.com.vn.karaoke.utils.VibratorUtils

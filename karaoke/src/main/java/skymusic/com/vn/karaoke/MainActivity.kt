@@ -1,17 +1,22 @@
 package skymusic.com.vn.karaoke
 
 import android.Manifest
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.blankj.utilcode.util.PermissionUtils
 import com.orhanobut.logger.Logger
+import com.toan_itc.core.base.CoreBaseActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : CoreBaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun setLayoutResourceID(): Int {
+        return R.layout.activity_main
+    }
+
+    override fun initViews() {
         permission()
+    }
+
+    override fun initData() {
+
     }
 
     private fun permission() {

@@ -1,7 +1,7 @@
 package skymusic.com.vn.karaoke.ui.home
 
-import androidx.lifecycle.ViewModel
+import com.toan_itc.core.base.BaseViewModel
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel : BaseViewModel() {
 
 }
