@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.arch.lifecycle.ProcessLifecycleOwner
 import android.os.StrictMode
+import android.support.v4.app.Fragment
 import com.blankj.utilcode.util.Utils
 import com.github.moduth.blockcanary.BlockCanary
 import com.orhanobut.logger.AndroidLogAdapter
@@ -11,8 +12,10 @@ import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 import com.squareup.leakcanary.LeakCanary
 import com.squareup.leakcanary.RefWatcher
+import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
+import dagger.android.support.HasSupportFragmentInjector
 import skymusic.com.vn.karaoke.BuildConfig
 import skymusic.com.vn.karaoke.R
 import skymusic.com.vn.karaoke.di.AppInjector
@@ -23,9 +26,13 @@ import javax.inject.Inject
  * Email:Huynhvantoan.itc@gmail.com
  */
 
-class App : Application(), HasActivityInjector {
+class App : Application(), HasActivityInjector, HasSupportFragmentInjector {
+
     @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+    lateinit var dispatchingAndroidActivityInjector: DispatchingAndroidInjector<Activity>
+    @Inject
+    lateinit var dispatchingAndroidFragmentInjector: DispatchingAndroidInjector<Fragment>
+
     private var mRefWatcher: RefWatcher? = null
     private lateinit var appObserver: ForegroundBackgroundListener
 
@@ -38,7 +45,9 @@ class App : Application(), HasActivityInjector {
         return mRefWatcher
     }
 
-    override fun activityInjector() = dispatchingAndroidInjector
+    override fun activityInjector() = dispatchingAndroidActivityInjector
+
+    override fun supportFragmentInjector() = dispatchingAndroidFragmentInjector
 
     override fun onCreate() {
         super.onCreate()

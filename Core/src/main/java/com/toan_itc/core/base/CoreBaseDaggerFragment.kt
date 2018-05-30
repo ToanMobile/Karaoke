@@ -15,10 +15,10 @@ import com.toan_itc.core.binding.FragmentDataBindingComponent
 import javax.inject.Inject
 
 abstract class CoreBaseDaggerFragment<VM : BaseViewModel> : Fragment(), Injectable {
-    @Inject
+  /*  @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject
-    lateinit var appExecutors: AppExecutors
+    lateinit var appExecutors: AppExecutors*/
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
     lateinit var viewModel: VM
     abstract fun getViewModel(): Class<VM>
@@ -34,7 +34,7 @@ abstract class CoreBaseDaggerFragment<VM : BaseViewModel> : Fragment(), Injectab
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this,viewModelFactory).get(getViewModel())
+        //viewModel = ViewModelProviders.of(this,viewModelFactory).get(getViewModel())
         initView()
         initData()
     }

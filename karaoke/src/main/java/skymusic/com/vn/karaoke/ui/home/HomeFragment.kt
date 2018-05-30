@@ -1,9 +1,13 @@
 package skymusic.com.vn.karaoke.ui.home
 
+import android.arch.lifecycle.ViewModelProvider
+import com.toan_itc.core.architecture.AppExecutors
 import com.toan_itc.core.base.CoreBaseDaggerFragment
 import dagger.android.AndroidInjection
 import dagger.android.support.AndroidSupportInjection
 import skymusic.com.vn.karaoke.R
+import skymusic.com.vn.karaoke.data.service.ApiService
+import javax.inject.Inject
 
 
 class HomeFragment : CoreBaseDaggerFragment<HomeViewModel>() {
