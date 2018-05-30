@@ -17,7 +17,7 @@
 package com.toan_itc.core.architecture
 
 import android.databinding.ViewDataBinding
-import androidx.recyclerview.widget.RecyclerView
+import android.support.v7.widget.RecyclerView
 
 /**
  * A generic ViewHolder that works with a [ViewDataBinding].

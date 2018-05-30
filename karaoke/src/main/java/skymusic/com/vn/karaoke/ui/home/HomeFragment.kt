@@ -1,11 +1,12 @@
 package skymusic.com.vn.karaoke.ui.home
 
-import com.acrcloud.rec.sdk.IACRCloudListener
 import com.toan_itc.core.base.CoreBaseDaggerFragment
+import dagger.android.AndroidInjection
+import dagger.android.support.AndroidSupportInjection
 import skymusic.com.vn.karaoke.R
 
 
-class HomeFragment : CoreBaseDaggerFragment<HomeViewModel>(), IACRCloudListener {
+class HomeFragment : CoreBaseDaggerFragment<HomeViewModel>() {
 
     override fun getViewModel(): Class<HomeViewModel> {
         return HomeViewModel::class.java
@@ -20,15 +21,7 @@ class HomeFragment : CoreBaseDaggerFragment<HomeViewModel>(), IACRCloudListener 
     }
 
     override fun initView() {
-
-    }
-
-    override fun onResult(p0: String?) {
-
-    }
-
-    override fun onVolumeChanged(p0: Double) {
-
+        viewModel.startService(context)
     }
 
 }

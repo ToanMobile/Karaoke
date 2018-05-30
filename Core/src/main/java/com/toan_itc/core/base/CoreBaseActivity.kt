@@ -1,8 +1,8 @@
 package com.toan_itc.core.base
 
 import android.os.Bundle
-import androidx.annotation.LayoutRes
-import androidx.appcompat.app.AppCompatActivity
+import android.support.annotation.LayoutRes
+import android.support.v7.app.AppCompatActivity
 
 abstract class CoreBaseActivity : AppCompatActivity(){
     @LayoutRes

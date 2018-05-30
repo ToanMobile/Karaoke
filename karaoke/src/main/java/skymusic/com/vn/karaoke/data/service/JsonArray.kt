@@ -9,6 +9,6 @@ import com.google.gson.annotations.Expose
 
 class JsonArray<T> {
     @Expose
-    var result: List<T>? = null
+    var data: List<T>? = null
 }
 

@@ -1,14 +1,14 @@
 package com.toan_itc.core.base
 
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
+import android.databinding.DataBindingComponent
 import android.os.Bundle
+import android.support.annotation.LayoutRes
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
-import androidx.databinding.DataBindingComponent
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.toan_itc.core.architecture.AppExecutors
 import com.toan_itc.core.base.di.Injectable
 import com.toan_itc.core.binding.FragmentDataBindingComponent

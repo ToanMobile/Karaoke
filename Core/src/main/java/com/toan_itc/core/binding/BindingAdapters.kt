@@ -16,6 +16,7 @@
 
 package com.toan_itc.core.binding
 
+import android.databinding.BindingAdapter
 import android.view.View
 
 /**

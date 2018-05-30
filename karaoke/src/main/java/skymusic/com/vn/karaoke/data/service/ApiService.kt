@@ -1,6 +1,6 @@
 package skymusic.com.vn.karaoke.data.service
 
-import androidx.lifecycle.LiveData
+import android.arch.lifecycle.LiveData
 import com.toan_itc.core.architecture.ApiResponse
 import retrofit2.http.GET
 import retrofit2.http.Query

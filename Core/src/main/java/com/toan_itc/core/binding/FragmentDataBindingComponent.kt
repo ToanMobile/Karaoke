@@ -1,10 +1,10 @@
 package com.toan_itc.core.binding
 
-import androidx.databinding.DataBindingComponent
-import androidx.fragment.app.Fragment
+import android.databinding.DataBindingComponent
+import android.support.v4.app.Fragment
 
 /**
- * Created by Toan.IT on 11/3/17.
+ * Created by Toan.IT on 30/5/17.
  * Email:Huynhvantoan.itc@gmail.com
  */
 

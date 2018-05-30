@@ -1,17 +1,17 @@
 ext.deps = [:]
 def versions = [:]
-versions.android_gradle_plugin = "3.2.0-alpha15"
+versions.android_gradle_plugin = "3.2.0-alpha16"
 //Support
-versions.arch               = "2.0.0-alpha1"
-versions.support            = "1.0.0-alpha1"
+versions.arch               = "1.1.1"
+versions.support            = "27.1.1"
 versions.work               = "1.0.0-alpha02"
 versions.supportAnko        = "0.10.5"
 versions.kotlin             = "1.2.41"
-versions.mutidex            = "2.0.0"
+versions.mutidex            = "1.0.3"
 versions.navigation         = "1.0.0-alpha01"
 versions.constraint_layout  = "1.1.0"
 //Libraries :Core
-versions.dagger             = "2.16"
+versions.dagger             = "2.15"
 versions.logger             = "2.1.1"
 versions.glide              = "4.7.1"
 versions.eventbus           = "3.1.1"
@@ -19,6 +19,7 @@ versions.retrofit           = "2.4.0"
 versions.okHttp             = "3.10.0"
 versions.okHttpLogging      = "2.0.5"
 //Utils
+versions.ktx                = "0.3"
 versions.utilcode           = "1.15.1"
 versions.rich               = "2.2.1"
 versions.kotlinify          = "1.3.1"
@@ -28,16 +29,26 @@ versions.blockcanary        = "1.5.0"
 versions.stetho             = "1.5.0"
 versions.realmStetho        = "2.1.0"
 //Libraries :App
-versions.exoplayer          = "2.8.1"
 
 def deps = [:]
 
+def supportx = [:]
+supportx.annotations         = "androidx.annotation:annotation:$versions.support"
+supportx.app_compat          = "androidx.appcompat:appcompat:$versions.support"
+supportx.recyclerview        = "androidx.recyclerview:recyclerview:$versions.support"
+supportx.design              = "com.google.android.material:material:$versions.support"
+supportx.constraint_layout   = "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
+deps.supportx = supportx
+
 def support = [:]
-support.annotations         = "androidx.annotation:annotation:$versions.support"
-support.app_compat          = "androidx.appcompat:appcompat:$versions.support"
-support.recyclerview        = "androidx.recyclerview:recyclerview:$versions.support"
-support.design              = "com.google.android.material:material:$versions.support"
-support.constraint_layout   = "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
+support.annotations         = "com.android.support:support-annotations:$versions.support"
+support.app_compat          = "com.android.support:appcompat-v7:$versions.support"
+support.recyclerview        = "com.android.support:recyclerview-v7:$versions.support"
+support.design              = "com.android.support:design:$versions.support"
+support.support             = "com.android.support:support-vector-drawable:$versions.support"
+support.animated            = "com.android.support:animated-vector-drawable:$versions.support"
+support.media               = "com.android.support:support-media-compat:$versions.support"
+support.constraint_layout   = "com.android.support.constraint:constraint-layout:$versions.constraint_layout"
 deps.support = support
 
 def core = [:]
@@ -52,7 +63,7 @@ deps.libCore = libCore
 
 def utils =[:]
 utils.utilcode              = "com.blankj:utilcode:$versions.utilcode"
-utils.ktx                   = "androidx.core:core-ktx:$versions.support"
+utils.ktx                   = "androidx.core:core-ktx:$versions.ktx"
 utils.anko_commons          = "org.jetbrains.anko:anko-commons:$versions.supportAnko"
 //utils.reactivenetwork       = "com.github.pwittchen:reactivenetwork-rx2:$versions.reactivenetwork"
 utils.kotlinify             = "com.github.GilGoldzweig.kotlinify:reactive:$versions.kotlinify"
@@ -67,9 +78,9 @@ room.testing                = "androidx.room:room-testing:$versions.arch"
 deps.room = room
 
 def lifecycle = [:]
-lifecycle.runtime           = "androidx.lifecycle:lifecycle-runtime:$versions.arch"
-lifecycle.extensions        = "androidx.lifecycle:lifecycle-extensions:$versions.arch"
-lifecycle.java8             = "androidx.lifecycle:lifecycle-common-java8:$versions.arch"
+lifecycle.runtime           = "android.arch.lifecycle:runtime:$versions.arch"
+lifecycle.extensions        = "android.arch.lifecycle:extensions:$versions.arch"
+lifecycle.java8             = "android.arch.lifecycle:common-java8:$versions.arch"
 deps.lifecycle = lifecycle
 
 def arch_core = [:]
@@ -96,27 +107,27 @@ dagger.android_support      = "com.google.dagger:dagger-android-support:$version
 deps.dagger = dagger
 
 def work = [:]
-work.runtime                = "androidx.work:work-runtime-ktx:$versions.work"
-work.testing                = "androidx.work:work-testing:$versions.work"
-work.firebase               = "androidx.work:work-firebase:$versions.work"
+work.runtime                = "android.arch.work:work-runtime-ktx:$versions.work"
+work.testing                = "android.arch.work:work-testing-ktx:$versions.work"
+work.firebase               = "android.arch.work:work-firebase-ktx:$versions.work"
 deps.work = work
 
 def navigation = [:]
-navigation.runtime          = "android.arch.navigation:navigation-runtime:$versions.navigation"
+/*navigation.runtime          = "android.arch.navigation:navigation-runtime:$versions.navigation"
 navigation.fragment         = "android.arch.navigation:navigation-fragment:$versions.navigation"
-navigation.ui               = "android.arch.navigation:navigation-ui:$versions.navigation"
-/*navigation.runtime          = "android.arch.navigation:navigation-runtime-ktx:$versions.navigation"
+navigation.ui               = "android.arch.navigation:navigation-ui:$versions.navigation"*/
+navigation.runtime          = "android.arch.navigation:navigation-runtime-ktx:$versions.navigation"
 navigation.fragment         = "android.arch.navigation:navigation-fragment-ktx:$versions.navigation"
-navigation.ui               = "android.arch.navigation:navigation-ui-ktx:$versions.navigation"*/
+navigation.ui               = "android.arch.navigation:navigation-ui-ktx:$versions.navigation"
 deps.navigation = navigation
 
 def library = [:]
-library.exoplayer           = "com.google.android.exoplayer:exoplayer:$versions.exoplayer"
+//library.exoplayer           = "com.google.android.exoplayer:exoplayer:$versions.exoplayer"
 deps.library = library
 
 def compiler = [:]
 compiler.glide              = "com.github.bumptech.glide:compiler:$versions.glide"
-compiler.lifecycle          = "androidx.lifecycle:lifecycle-compiler:$versions.arch"
+compiler.lifecycle          = "android.arch.lifecycle:compiler:$versions.arch"
 compiler.dagger_compiler    = "com.google.dagger:dagger-compiler:$versions.dagger"
 compiler.android_compiler   = "com.google.dagger:dagger-android-processor:$versions.dagger"
 deps.compiler = compiler
@@ -137,15 +148,15 @@ deps.android_gradle_plugin  = "com.android.tools.build:gradle:$versions.android_
 deps.kotlin_plugin          = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
 deps.kotlin_allopen         = "org.jetbrains.kotlin:kotlin-allopen:$versions.kotlin"
 deps.safe_args_plugin       = "android.arch.navigation:navigation-safe-args-gradle-plugin:$versions.navigation"
-deps.multidex               = "androidx.multidex:multidex:$versions.mutidex"
+deps.multidex               = "com.android.support:multidex:$versions.mutidex"
 ext.deps = deps
 
 def build_versions = [:]
 build_versions.app_id       = "skymusic.com.vn.karaoke"
-build_versions.build_tool   = "28.0.0-rc2"
+build_versions.build_tool   = "27.0.3"
 build_versions.minSdk       = 21
-build_versions.compileSdk   = "android-P"
-build_versions.targetSdk    = "P"
+build_versions.compileSdk   = 27
+build_versions.targetSdk    = 27
 build_versions.versionCode  = 1
 build_versions.versionName  = "1.0.0"
 ext.build_versions = build_versions

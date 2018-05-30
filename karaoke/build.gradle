@@ -152,8 +152,16 @@ dependencies {
     implementation project(':Core')
     // Kotlin
     implementation deps.kotlin.stdlib
+    // Support libraries
+    for (dependency in deps.support) {
+        implementation dependency.value
+    }
     //Core
     for (dependency in deps.core) {
+        implementation dependency.value
+    }
+    // Navigation
+    for (dependency in deps.navigation) {
         implementation dependency.value
     }
     // Architecture components
@@ -190,6 +198,7 @@ dependencies {
     for (dependency in deps.library) {
         implementation dependency.value
     }
+    implementation deps.work.runtime
     // Test
     //implementation deps.multidex
     implementation deps.test.leakcanary

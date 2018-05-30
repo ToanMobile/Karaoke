@@ -1,6 +1,6 @@
 package com.toan_itc.core.architecture
 
-import androidx.lifecycle.LiveData
+import android.arch.lifecycle.LiveData
 
 /**
  * A LiveData class that has `null` value.

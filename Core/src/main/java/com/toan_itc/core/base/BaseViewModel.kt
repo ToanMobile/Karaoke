@@ -1,6 +1,6 @@
 package com.toan_itc.core.base
 
-import androidx.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModel
 import com.orhanobut.logger.Logger
 import com.toan_itc.core.base.event.Event
 import io.reactivex.disposables.CompositeDisposable

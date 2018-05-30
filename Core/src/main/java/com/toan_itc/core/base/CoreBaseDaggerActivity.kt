@@ -1,12 +1,12 @@
 package com.toan_itc.core.base
 
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.annotation.LayoutRes
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
+import android.support.annotation.LayoutRes
+import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
@@ -31,6 +31,7 @@ abstract class CoreBaseDaggerActivity<VM : ViewModel> : AppCompatActivity(), Has
         initViews()
         initData()
     }
+
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector
 }

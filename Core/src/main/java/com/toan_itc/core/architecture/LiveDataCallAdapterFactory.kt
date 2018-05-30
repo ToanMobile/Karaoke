@@ -1,6 +1,6 @@
 package com.toan_itc.core.architecture
 
-import androidx.lifecycle.LiveData
+import android.arch.lifecycle.LiveData
 import retrofit2.CallAdapter
 import retrofit2.Retrofit
 import java.lang.reflect.ParameterizedType

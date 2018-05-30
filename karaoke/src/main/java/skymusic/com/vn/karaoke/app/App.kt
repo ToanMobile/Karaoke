@@ -2,8 +2,8 @@ package skymusic.com.vn.karaoke.app
 
 import android.app.Activity
 import android.app.Application
+import android.arch.lifecycle.ProcessLifecycleOwner
 import android.os.StrictMode
-import androidx.lifecycle.ProcessLifecycleOwner
 import com.blankj.utilcode.util.Utils
 import com.github.moduth.blockcanary.BlockCanary
 import com.orhanobut.logger.AndroidLogAdapter
