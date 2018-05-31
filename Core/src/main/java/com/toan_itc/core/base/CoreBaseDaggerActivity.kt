@@ -8,13 +8,13 @@ import android.support.annotation.LayoutRes
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.DaggerAppCompatActivity
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
 
-abstract class CoreBaseDaggerActivity<VM : ViewModel> : AppCompatActivity(), HasSupportFragmentInjector {
-    @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+abstract class CoreBaseDaggerActivity<VM : ViewModel> : DaggerAppCompatActivity(){
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     protected lateinit var viewModel: VM
@@ -27,11 +27,10 @@ abstract class CoreBaseDaggerActivity<VM : ViewModel> : AppCompatActivity(), Has
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(setLayoutResourceID())
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModel())
         initViews()
         initData()
     }
 
-
-    override fun supportFragmentInjector() = dispatchingAndroidInjector
 }

@@ -18,8 +18,6 @@ import javax.inject.Singleton
 
 @Singleton
 class RecoderService : IntentService("RecoderService"), IACRCloudListener {
-    @Inject
-    lateinit var homeViewModel: HomeViewModel
 
     private var mClient: ACRCloudClient? = null
     private var mConfig: ACRCloudConfig? = null

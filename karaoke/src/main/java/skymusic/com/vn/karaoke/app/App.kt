@@ -15,10 +15,12 @@ import com.squareup.leakcanary.RefWatcher
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
+import dagger.android.support.DaggerApplication
 import dagger.android.support.HasSupportFragmentInjector
 import skymusic.com.vn.karaoke.BuildConfig
 import skymusic.com.vn.karaoke.R
-import skymusic.com.vn.karaoke.di.AppInjector
+import skymusic.com.vn.karaoke.di.applyAutoInjector
+import skymusic.com.vn.karaoke.di.component.DaggerAppComponent
 import javax.inject.Inject
 
 /**
@@ -26,12 +28,7 @@ import javax.inject.Inject
  * Email:Huynhvantoan.itc@gmail.com
  */
 
-class App : Application(), HasActivityInjector, HasSupportFragmentInjector {
-
-    @Inject
-    lateinit var dispatchingAndroidActivityInjector: DispatchingAndroidInjector<Activity>
-    @Inject
-    lateinit var dispatchingAndroidFragmentInjector: DispatchingAndroidInjector<Fragment>
+class App : DaggerApplication() {
 
     private var mRefWatcher: RefWatcher? = null
     private lateinit var appObserver: ForegroundBackgroundListener
@@ -45,13 +42,13 @@ class App : Application(), HasActivityInjector, HasSupportFragmentInjector {
         return mRefWatcher
     }
 
-    override fun activityInjector() = dispatchingAndroidActivityInjector
-
-    override fun supportFragmentInjector() = dispatchingAndroidFragmentInjector
+    override fun applicationInjector() = DaggerAppComponent.builder()
+            .application(this)
+            .build()
 
     override fun onCreate() {
         super.onCreate()
-        AppInjector.init(this)
+        applyAutoInjector()
         if (BuildConfig.DEBUG) {
             strictMode()
             setupLogger()
