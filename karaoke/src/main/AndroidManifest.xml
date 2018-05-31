@@ -30,7 +30,8 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".service.RecoderService"/>
+        <service android:name=".service.RecoderService"
+            android:process="RecoderService"/>
     </application>
 
 </manifest>

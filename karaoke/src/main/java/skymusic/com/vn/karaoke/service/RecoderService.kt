@@ -7,14 +7,14 @@ import com.acrcloud.rec.sdk.ACRCloudClient
 import com.acrcloud.rec.sdk.ACRCloudConfig
 import com.acrcloud.rec.sdk.IACRCloudListener
 import com.orhanobut.logger.Logger
+import org.greenrobot.eventbus.EventBus
 import org.json.JSONException
 import org.json.JSONObject
 import skymusic.com.vn.karaoke.BuildConfig
+import skymusic.com.vn.karaoke.event.InfoSongEvent
 import java.io.File
 import javax.inject.Singleton
 
-
-@Singleton
 class RecoderService : IntentService("RecoderService"), IACRCloudListener {
 
     private var mClient: ACRCloudClient? = null
@@ -22,7 +22,6 @@ class RecoderService : IntentService("RecoderService"), IACRCloudListener {
     private var mProcessing = false
     private var initState = false
     private var path = ""
-    private var isRecording = false
 
     companion object {
         const val START_LITERNER = "START_LITERNER"
@@ -40,6 +39,11 @@ class RecoderService : IntentService("RecoderService"), IACRCloudListener {
                     }
                 }
                 STOP_LITERNER -> {
+                    mClient?.apply {
+                        if (mProcessing)
+                            stopRecordToRecognize()
+                        mProcessing = false
+                    }
                 }
             }
         }
@@ -122,17 +126,13 @@ class RecoderService : IntentService("RecoderService"), IACRCloudListener {
                 }
             }
             Logger.e("result=$result")
-            checkSong(title, singer)
+            EventBus.getDefault().post(InfoSongEvent(title,singer))
         } catch (e: JSONException) {
             e.printStackTrace()
         }
     }
 
     override fun onVolumeChanged(volume: Double) {
-
-    }
-
-    private fun checkSong(title: String, singer: String) {
 
     }
 }

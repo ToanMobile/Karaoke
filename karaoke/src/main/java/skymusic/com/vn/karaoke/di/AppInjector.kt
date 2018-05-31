@@ -11,7 +11,7 @@ import dagger.android.AndroidInjection
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.HasSupportFragmentInjector
 import skymusic.com.vn.karaoke.app.App
-
+import skymusic.com.vn.karaoke.di.component.DaggerAppComponent
 
 object AppInjector {
     fun init(app: App) {

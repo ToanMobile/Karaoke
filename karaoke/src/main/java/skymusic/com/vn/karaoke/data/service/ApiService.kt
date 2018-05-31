@@ -17,6 +17,6 @@ interface ApiService {
 
     @GET("checksong")
     fun checkSong(@Query("songName") songName: String, @Query("singer") singer: String, @Query("op") op: String
-                  , @Query("client_id") client_id: String, @Query("client_secret") client_secret: String): LiveData<ApiResponse<JsonArray<CheckSong>>>
+                  , @Query("client_id") client_id: String, @Query("client_secret") client_secret: String): LiveData<ApiResponse<CheckSong>>
 
 }
