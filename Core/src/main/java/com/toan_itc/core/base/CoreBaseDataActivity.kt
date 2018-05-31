@@ -5,15 +5,12 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.annotation.LayoutRes
-import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.DaggerAppCompatActivity
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
 
-abstract class CoreBaseDaggerActivity<VM : ViewModel> : DaggerAppCompatActivity(){
+abstract class CoreBaseDataActivity<VM : ViewModel> : AppCompatActivity(){
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory

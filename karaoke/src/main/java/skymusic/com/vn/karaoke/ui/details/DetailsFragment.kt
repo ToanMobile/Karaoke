@@ -1,11 +1,9 @@
 package skymusic.com.vn.karaoke.ui.details
 
-import android.databinding.DataBindingComponent
-import com.toan_itc.core.base.CoreBaseDaggerFragment
-import com.toan_itc.core.binding.FragmentDataBindingComponent
+import com.toan_itc.core.base.CoreBaseDataFragment
 import skymusic.com.vn.karaoke.R
 
-class DetailsFragment : CoreBaseDaggerFragment<DetailsViewModel>() {
+class DetailsFragment : CoreBaseDataFragment<DetailsViewModel>() {
   //  var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
     override fun getViewModel(): Class<DetailsViewModel> {
         return DetailsViewModel::class.java

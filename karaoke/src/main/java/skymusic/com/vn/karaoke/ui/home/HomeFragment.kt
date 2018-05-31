@@ -1,18 +1,10 @@
 package skymusic.com.vn.karaoke.ui.home
 
-import android.arch.lifecycle.ViewModelProvider
-import android.databinding.DataBindingComponent
-import com.toan_itc.core.architecture.AppExecutors
-import com.toan_itc.core.base.CoreBaseDaggerFragment
-import com.toan_itc.core.binding.FragmentDataBindingComponent
-import dagger.android.AndroidInjection
-import dagger.android.support.AndroidSupportInjection
+import com.toan_itc.core.base.CoreBaseDataFragment
 import skymusic.com.vn.karaoke.R
-import skymusic.com.vn.karaoke.data.service.ApiService
-import javax.inject.Inject
 
 
-class HomeFragment : CoreBaseDaggerFragment<HomeViewModel>() {
+class HomeFragment : CoreBaseDataFragment<HomeViewModel>() {
    // var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
     override fun getViewModel(): Class<HomeViewModel> {
         return HomeViewModel::class.java

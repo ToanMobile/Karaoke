@@ -2,7 +2,6 @@ package com.toan_itc.core.base
 
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingComponent
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v4.app.Fragment
@@ -10,11 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.toan_itc.core.architecture.AppExecutors
-import com.toan_itc.core.binding.FragmentDataBindingComponent
-import dagger.android.support.DaggerFragment
+import com.toan_itc.core.base.di.Injectable
 import javax.inject.Inject
 
-abstract class CoreBaseDaggerFragment<VM : BaseViewModel> : DaggerFragment() {
+abstract class CoreBaseDataFragment<VM : BaseViewModel> : Fragment(),Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject

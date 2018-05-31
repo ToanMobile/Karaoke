@@ -10,9 +10,7 @@ import com.orhanobut.logger.Logger
 import org.json.JSONException
 import org.json.JSONObject
 import skymusic.com.vn.karaoke.BuildConfig
-import skymusic.com.vn.karaoke.ui.home.HomeViewModel
 import java.io.File
-import javax.inject.Inject
 import javax.inject.Singleton
 
 

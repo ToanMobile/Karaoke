@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Application
 import android.arch.lifecycle.ProcessLifecycleOwner
 import android.os.StrictMode
-import android.support.v4.app.Fragment
 import com.blankj.utilcode.util.Utils
 import com.github.moduth.blockcanary.BlockCanary
 import com.orhanobut.logger.AndroidLogAdapter
@@ -12,15 +11,11 @@ import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 import com.squareup.leakcanary.LeakCanary
 import com.squareup.leakcanary.RefWatcher
-import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
-import dagger.android.support.DaggerApplication
-import dagger.android.support.HasSupportFragmentInjector
 import skymusic.com.vn.karaoke.BuildConfig
 import skymusic.com.vn.karaoke.R
-import skymusic.com.vn.karaoke.di.applyAutoInjector
-import skymusic.com.vn.karaoke.di.component.DaggerAppComponent
+import skymusic.com.vn.karaoke.di.AppInjector
 import javax.inject.Inject
 
 /**
@@ -28,8 +23,10 @@ import javax.inject.Inject
  * Email:Huynhvantoan.itc@gmail.com
  */
 
-class App : DaggerApplication() {
-
+class App : Application(), HasActivityInjector {
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+    override fun activityInjector() = dispatchingAndroidInjector
     private var mRefWatcher: RefWatcher? = null
     private lateinit var appObserver: ForegroundBackgroundListener
 
@@ -42,13 +39,9 @@ class App : DaggerApplication() {
         return mRefWatcher
     }
 
-    override fun applicationInjector() = DaggerAppComponent.builder()
-            .application(this)
-            .build()
-
     override fun onCreate() {
         super.onCreate()
-        applyAutoInjector()
+        AppInjector.init(this)
         if (BuildConfig.DEBUG) {
             strictMode()
             setupLogger()

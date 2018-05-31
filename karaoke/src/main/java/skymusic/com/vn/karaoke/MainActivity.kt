@@ -1,11 +1,19 @@
 package skymusic.com.vn.karaoke
 
 import android.Manifest
+import android.support.v4.app.Fragment
 import com.blankj.utilcode.util.PermissionUtils
 import com.orhanobut.logger.Logger
 import com.toan_itc.core.base.CoreBaseActivity
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
+import javax.inject.Inject
 
-class MainActivity : CoreBaseActivity() {
+class MainActivity : CoreBaseActivity(), HasSupportFragmentInjector{
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+
+    override fun supportFragmentInjector() = dispatchingAndroidInjector
 
     override fun setLayoutResourceID(): Int {
         return R.layout.activity_main

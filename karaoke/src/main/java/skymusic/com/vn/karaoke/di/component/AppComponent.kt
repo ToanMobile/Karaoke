@@ -2,8 +2,6 @@ package skymusic.com.vn.karaoke.di.component
 
 import dagger.BindsInstance
 import dagger.Component
-import dagger.android.AndroidInjectionModule
-import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import skymusic.com.vn.karaoke.app.App
 import skymusic.com.vn.karaoke.di.module.*
@@ -21,7 +19,7 @@ import javax.inject.Singleton
     (ServiceModule::class),
     (ActivityBuildersModule::class),
     (ViewModelModule::class)])
-interface AppComponent : AndroidInjector<App> {
+interface AppComponent {
     @Component.Builder
     interface Builder {
         @BindsInstance
@@ -30,5 +28,5 @@ interface AppComponent : AndroidInjector<App> {
         fun build(): AppComponent
     }
 
-    override fun inject(app: App)
+    fun inject(app: App)
 }
