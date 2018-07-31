@@ -21,7 +21,7 @@ import retrofit2.Response
 import java.util.regex.Pattern
 
 /**
- * Created by ToanDev on 28/2/18.
+ * Created by ToanDev on 06/07/18.
  * Email:Huynhvantoan.itc@gmail.com
  * Common class used by API responses.
  * @param <T> the type of the response object

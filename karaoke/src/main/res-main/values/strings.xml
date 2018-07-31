@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Recorder</string>
-
+    <string name="app_name">SKY Karaoke</string>
+    <string name="no_found_song">KHÔNG TÌM ĐƯỢC BÀI HÁT</string>
+    <string name="copyright_yes">Có</string>
+    <string name="copyright_no">N/A</string>
+    <string name="text_banquyen">Quyền để khai thác bản ghi này.</string>
+    <string name="text_sky_music">Sky Music</string>
+    <string name="text_vcpmc">VCPMC</string>
+    <string name="ten_banghi">Bản ghi:</string>
+    <string name="txt_casi">Ca sĩ:</string>
+    <string name="txt_tacgia">Tác giả:</string>
+    <string name="blank" />
+    <string name="msg_exit">Bấm Back lần nữa để thoát ứng dụng!</string>
 </resources>

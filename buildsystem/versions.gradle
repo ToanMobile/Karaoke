@@ -1,26 +1,28 @@
 ext.deps = [:]
 def versions = [:]
-versions.android_gradle_plugin = "3.2.0-alpha16"
+versions.android_gradle_plugin = "3.3.0-alpha03"
 //Support
-versions.arch               = "1.1.1"
-versions.support            = "27.1.1"
-versions.work               = "1.0.0-alpha02"
+versions.arch               = "2.0.0-beta01"
+versions.support            = "1.0.0-beta01"
+versions.work               = "1.0.0-alpha04"
 versions.supportAnko        = "0.10.5"
-versions.kotlin             = "1.2.41"
+versions.kotlin             = "1.2.51"
 versions.mutidex            = "1.0.3"
-versions.navigation         = "1.0.0-alpha01"
-versions.constraint_layout  = "1.1.0"
+versions.navigation         = "1.0.0-alpha03"
+versions.constraint_layout  = "2.0.0-alpha1"
 //Libraries :Core
-versions.dagger             = "2.15"
-versions.logger             = "2.1.1"
-versions.glide              = "4.7.1"
+versions.rxkotlin           = "2.2.0"
+versions.rxandroid          = "2.0.2"
+versions.dagger             = "2.16"
+versions.logger             = "2.2.0"
+versions.glide              = "4.8.0-SNAPSHOT"
 versions.eventbus           = "3.1.1"
 versions.retrofit           = "2.4.0"
-versions.okHttp             = "3.10.0"
-versions.okHttpLogging      = "2.0.5"
+versions.okHttp             = "3.11.0"
+versions.okHttpLogging      = "2.0.6"
+versions.permisstion        = "4.0.0-alpha1"
 //Utils
-versions.ktx                = "0.3"
-versions.utilcode           = "1.15.1"
+versions.utilcode           = "1.17.2"
 versions.rich               = "2.2.1"
 versions.kotlinify          = "1.3.1"
 //Libraries: Development
@@ -29,43 +31,34 @@ versions.blockcanary        = "1.5.0"
 versions.stetho             = "1.5.0"
 versions.realmStetho        = "2.1.0"
 //Libraries :App
-
+versions.horizon            = "1.0.1"
 def deps = [:]
 
-def supportx = [:]
-supportx.annotations         = "androidx.annotation:annotation:$versions.support"
-supportx.app_compat          = "androidx.appcompat:appcompat:$versions.support"
-supportx.recyclerview        = "androidx.recyclerview:recyclerview:$versions.support"
-supportx.design              = "com.google.android.material:material:$versions.support"
-supportx.constraint_layout   = "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
-deps.supportx = supportx
-
 def support = [:]
-support.annotations         = "com.android.support:support-annotations:$versions.support"
-support.app_compat          = "com.android.support:appcompat-v7:$versions.support"
-support.recyclerview        = "com.android.support:recyclerview-v7:$versions.support"
-support.design              = "com.android.support:design:$versions.support"
-support.support             = "com.android.support:support-vector-drawable:$versions.support"
-support.animated            = "com.android.support:animated-vector-drawable:$versions.support"
-support.media               = "com.android.support:support-media-compat:$versions.support"
-support.constraint_layout   = "com.android.support.constraint:constraint-layout:$versions.constraint_layout"
+support.annotations         = "androidx.annotation:annotation:$versions.support"
+support.app_compat          = "androidx.appcompat:appcompat:$versions.support"
+support.recyclerview        = "androidx.recyclerview:recyclerview:$versions.support"
+support.design              = "com.google.android.material:material:$versions.support"
+support.constraint_layout   = "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
 deps.support = support
 
 def core = [:]
+core.rx_kotlin              = "io.reactivex.rxjava2:rxkotlin:$versions.rxkotlin"
+core.rx_android             = "io.reactivex.rxjava2:rxandroid:$versions.rxandroid"
 core.eventbus               = "org.greenrobot:eventbus:$versions.eventbus"
 core.logger                 = "com.orhanobut:logger:$versions.logger"
 deps.core = core
 
 def libCore =[:]
+libCore.permisstion         = "com.github.hotchemi:permissionsdispatcher:$versions.permisstion"
 libCore.ok_httpLogging      = "com.github.ihsanbal:LoggingInterceptor:$versions.okHttpLogging"
 libCore.glide_recycler      = "com.github.bumptech.glide:recyclerview-integration:$versions.glide"
 deps.libCore = libCore
 
 def utils =[:]
 utils.utilcode              = "com.blankj:utilcode:$versions.utilcode"
-utils.ktx                   = "androidx.core:core-ktx:$versions.ktx"
+utils.ktx                   = "androidx.core:core-ktx:$versions.support"
 utils.anko_commons          = "org.jetbrains.anko:anko-commons:$versions.supportAnko"
-//utils.reactivenetwork       = "com.github.pwittchen:reactivenetwork-rx2:$versions.reactivenetwork"
 utils.kotlinify             = "com.github.GilGoldzweig.kotlinify:reactive:$versions.kotlinify"
 utils.rich                  = "com.github.WindSekirun:RichUtilsKt:$versions.rich"
 deps.utils = utils
@@ -78,9 +71,9 @@ room.testing                = "androidx.room:room-testing:$versions.arch"
 deps.room = room
 
 def lifecycle = [:]
-lifecycle.runtime           = "android.arch.lifecycle:runtime:$versions.arch"
-lifecycle.extensions        = "android.arch.lifecycle:extensions:$versions.arch"
-lifecycle.java8             = "android.arch.lifecycle:common-java8:$versions.arch"
+lifecycle.runtime           = "androidx.lifecycle:lifecycle-runtime:$versions.arch"
+lifecycle.extensions        = "androidx.lifecycle:lifecycle-extensions:$versions.arch"
+lifecycle.java8             = "androidx.lifecycle:lifecycle-common-java8:$versions.arch"
 deps.lifecycle = lifecycle
 
 def arch_core = [:]
@@ -122,12 +115,13 @@ navigation.ui               = "android.arch.navigation:navigation-ui-ktx:$versio
 deps.navigation = navigation
 
 def library = [:]
-//library.exoplayer           = "com.google.android.exoplayer:exoplayer:$versions.exoplayer"
+library.horizon             = "com.yalantis:eqwaves:$versions.horizon"
 deps.library = library
 
 def compiler = [:]
+compiler.permisstion        = "com.github.hotchemi:permissionsdispatcher-processor:$versions.permisstion"
 compiler.glide              = "com.github.bumptech.glide:compiler:$versions.glide"
-compiler.lifecycle          = "android.arch.lifecycle:compiler:$versions.arch"
+compiler.lifecycle          = "androidx.lifecycle:lifecycle-compiler:$versions.arch"
 compiler.dagger_compiler    = "com.google.dagger:dagger-compiler:$versions.dagger"
 compiler.android_compiler   = "com.google.dagger:dagger-android-processor:$versions.dagger"
 deps.compiler = compiler
@@ -153,12 +147,11 @@ ext.deps = deps
 
 def build_versions = [:]
 build_versions.app_id       = "skymusic.com.vn.karaoke"
-build_versions.build_tool   = "27.0.3"
 build_versions.minSdk       = 21
-build_versions.compileSdk   = 27
-build_versions.targetSdk    = 27
-build_versions.versionCode  = 1
-build_versions.versionName  = "1.0.0"
+build_versions.compileSdk   = 28
+build_versions.targetSdk    = 28
+build_versions.versionCode  = 2
+build_versions.versionName  = "2.0.0"
 ext.build_versions = build_versions
 
 def key_store = [:]
@@ -178,6 +171,11 @@ def addRepos(RepositoryHandler handler) {
     handler.jcenter()
     handler.maven {
         url 'https://oss.sonatype.org/content/repositories/snapshots'
-        url 'https://jitpack.io'}
+        url 'https://jitpack.io'
+    }
+    handler.maven {
+        name 'glide-snapshot'
+        url 'http://oss.sonatype.org/content/repositories/snapshots'
+    }
 }
 ext.addRepos = this.&addRepos

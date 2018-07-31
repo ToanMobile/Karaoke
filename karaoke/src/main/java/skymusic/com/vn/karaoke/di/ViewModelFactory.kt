@@ -1,7 +1,7 @@
 package skymusic.com.vn.karaoke.di
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import javax.inject.Inject
 import javax.inject.Provider
 import javax.inject.Singleton
@@ -23,7 +23,10 @@ class ViewModelFactory @Inject constructor(
             @Suppress("UNCHECKED_CAST")
             return creator.get() as T
         } catch (e: Exception) {
+            e.printStackTrace()
             throw RuntimeException(e)
         }
+
     }
 }
+

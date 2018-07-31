@@ -9,6 +9,6 @@ import com.google.gson.annotations.Expose
 
 class JsonObject<T> {
     @Expose
-    var result: T? = null
+    var data: T? = null
 }
 

@@ -9,7 +9,6 @@ buildscript {
         //classpath deps.safe_args_plugin
     }
     repositories {
-        mavenCentral()
         google()
     }
 }

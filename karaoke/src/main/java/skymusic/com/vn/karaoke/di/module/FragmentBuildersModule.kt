@@ -3,8 +3,7 @@ package skymusic.com.vn.karaoke.di.module
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import skymusic.com.vn.karaoke.di.FragmentScope
-import skymusic.com.vn.karaoke.ui.details.DetailsFragment
-import skymusic.com.vn.karaoke.ui.home.HomeFragment
+import skymusic.com.vn.karaoke.main.MainFragment
 
 /**
  * Created by ToanDev on 28/2/18.
@@ -16,10 +15,6 @@ abstract class FragmentBuildersModule {
 
     @FragmentScope
     @ContributesAndroidInjector
-    abstract fun contributeHomeFragment(): HomeFragment
-
-    @FragmentScope
-    @ContributesAndroidInjector
-    abstract fun contributeDetailsFragment(): DetailsFragment
+    abstract fun contributeMainFragment(): MainFragment
 
 }

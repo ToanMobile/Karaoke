@@ -1,6 +1,6 @@
 package skymusic.com.vn.karaoke.di.key
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import dagger.MapKey
 import kotlin.reflect.KClass
 

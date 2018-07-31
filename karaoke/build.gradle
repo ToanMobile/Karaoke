@@ -10,7 +10,6 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 
 android {
     compileSdkVersion build_versions.compileSdk
-    buildToolsVersion build_versions.build_tool
     defaultConfig {
         applicationId build_versions.app_id
         minSdkVersion build_versions.minSdk
@@ -19,10 +18,6 @@ android {
         versionName build_versions.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
-        sourceSets.main {
-            jniLibs.srcDir 'src/main/libs'
-            jni.srcDirs = []
-        }
     }
 
     if(projects.hasProperty('devBuild')){
@@ -47,39 +42,30 @@ android {
 
     buildTypes {
         debug {
+            buildConfigField "String", "BASE_URL", '"http://192.168.100.122/dejavu/"'
+            buildConfigField "String", "BASE_URL_LOG", '"http://karaoke.skymusic.com.vn/"'
+            buildConfigField "String", "HOST", '"identify-ap-southeast-1.acrcloud.com"'
+            buildConfigField "String", "ACCESS_KEY", '"98792dc4b50fd8b140f977ff4251374b"'
+            buildConfigField "String", "ACCESS_SECRET", '"RybGa6skfvd6JGMx59eWs91BZLeEZj7pqRkO4LHU"'
+            buildConfigField "String", "OP", '"1"'
+            buildConfigField "String", "CLIENT_KEY", '"kct171101"'
+            buildConfigField "String", "CLIENT_SECRET", '"e4d5962539f7a6fa691e1cfb81b73cf3"'
             applicationIdSuffix ".debug"
             debuggable true
         }
         release {
+            buildConfigField "String", "BASE_URL", '"https://35.240.214.197/dejavu/"'
+            buildConfigField "String", "BASE_URL_LOG", '"http://karaoke.skymusic.com.vn/"'
+            buildConfigField "String", "HOST", '"identify-ap-southeast-1.acrcloud.com"'
+            buildConfigField "String", "ACCESS_KEY", '"98792dc4b50fd8b140f977ff4251374b"'
+            buildConfigField "String", "ACCESS_SECRET", '"RybGa6skfvd6JGMx59eWs91BZLeEZj7pqRkO4LHU"'
+            buildConfigField "String", "OP", '"1"'
+            buildConfigField "String", "CLIENT_KEY", '"kct171101"'
+            buildConfigField "String", "CLIENT_SECRET", '"e4d5962539f7a6fa691e1cfb81b73cf3"'
             signingConfig signingConfigs.Key
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'),
                     key_store.proguard_rules, key_store.proguard_rx, key_store.proguard_square, key_store.proguard_support
-        }
-    }
-
-    flavorDimensions "content"
-    productFlavors {
-        uHotelDev {
-            minSdkVersion build_versions.min_sdk
-            buildConfigField "String", "BASE_URL", '"https://skymusic.com.vn/api/"'
-            buildConfigField "String", "HOST", '"identify-ap-southeast-1.acrcloud.com"'
-            buildConfigField "String", "ACCESS_KEY", '"c5f8665809ec9f785424fb1b837ac283"'
-            buildConfigField "String", "OP", '"1"'
-            buildConfigField "String", "ACCESS_SECRET", '"JOfSDjCUb7ITdQK9JHykSVIqPmJeFM3RLc6RgSzY"'
-            buildConfigField "String", "CLIENT_KEY", '"kct171101"'
-            buildConfigField "String", "CLIENT_SECRET", '"e4d5962539f7a6fa691e1cfb81b73cf3"'
-            dimension "content"
-        }
-        uHotelRelease {
-            buildConfigField "String", "BASE_URL", '"https://skymusic.com.vn/api/"'
-            buildConfigField "String", "HOST", '"identify-ap-southeast-1.acrcloud.com"'
-            buildConfigField "String", "ACCESS_KEY", '"c5f8665809ec9f785424fb1b837ac283"'
-            buildConfigField "String", "OP", '"1"'
-            buildConfigField "String", "ACCESS_SECRET", '"JOfSDjCUb7ITdQK9JHykSVIqPmJeFM3RLc6RgSzY"'
-            buildConfigField "String", "CLIENT_KEY", '"kct171101"'
-            buildConfigField "String", "CLIENT_SECRET", '"e4d5962539f7a6fa691e1cfb81b73cf3"'
-            dimension "content"
         }
     }
 
@@ -136,11 +122,6 @@ android {
     dataBinding {
         enabled = true
     }
-    task ndkBuild(type: Exec) {
-        properties.load(project.rootProject.file('local.properties').newDataInputStream())
-        def ndkDir = properties.getProperty('ndk.dir')
-        commandLine "$ndkDir/ndk-build", '-B', '-C', file('src/main/jni').absolutePath
-    }
 }
 
 kotlin {
@@ -162,10 +143,6 @@ dependencies {
     for (dependency in deps.core) {
         implementation dependency.value
     }
-    // Navigation
-    for (dependency in deps.navigation) {
-        implementation dependency.value
-    }
     // Architecture components
     for (dependency in deps.lifecycle) {
         implementation dependency.value
@@ -182,10 +159,13 @@ dependencies {
     for (dependency in deps.retrofit) {
         implementation dependency.value
     }
-    implementation (deps.libCore.ok_httpLogging,{
+    implementation(deps.libCore.ok_httpLogging, {
         exclude group: 'org.json', module: 'json'
     })
-    implementation (deps.libCore.glide_recycler,{
+    implementation(deps.libCore.permisstion, {
+        exclude module: "support-v13"
+    })
+    implementation(deps.libCore.glide_recycler, {
         transitive = false
     })
     //Image Loading
@@ -197,17 +177,8 @@ dependencies {
         implementation dependency.value
     }
     //Library
-    for (dependency in deps.library) {
-        implementation dependency.value
-    }
+    implementation 'com.github.Jay-Goo:WaveLineView:v1.0.3'
     implementation deps.work.runtime
-    // Test
-    //implementation deps.multidex
-    implementation deps.test.leakcanary
-    releaseImplementation deps.test.leakcanary_no_op
-    testImplementation deps.test.leakcanary_no_op
-    implementation deps.test.blockDebug
-    releaseImplementation deps.test.blockRelease
 }
 
 @SuppressWarnings("GrMethodMayBeStatic")

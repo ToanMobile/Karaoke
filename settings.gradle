@@ -1,2 +1,2 @@
-include ':karaoke'
+include ':Karaoke'
 include ':Core'

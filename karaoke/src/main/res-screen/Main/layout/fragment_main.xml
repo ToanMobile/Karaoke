@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="skymusic.com.vn.karaoke.main.MainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutHome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <jaygoo.widget.wlv.WaveLineView
+            android:id="@+id/waveLineView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_100"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:wlvBackgroundColor="@android:color/white"
+            app:wlvFineLineWidth="5dp"
+            app:wlvLineColor="@color/colorPrimary"
+            app:wlvMoveSpeed="290" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_200"
+            android:layout_gravity="center"
+            android:contentDescription="@null"
+            android:src="@drawable/skymusic_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtInfoSongName"
+            android:layout_width="@dimen/layout_75"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/ten_banghi"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSize18"
+            app:layout_constraintBottom_toBottomOf="@+id/txtSongName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txtSongName" />
+
+        <TextView
+            android:id="@+id/txtSongName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/blank"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSize22"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtInfoSongName"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.4" />
+
+        <TextView
+            android:id="@+id/txtInfoSongSinger"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="Confidence: "
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSize18"
+            app:layout_constraintBottom_toBottomOf="@+id/txtSongSinger"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txtSongSinger" />
+        <!--android:text="@string/txt_casi"-->
+        <TextView
+            android:id="@+id/txtSongSinger"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/blank"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSize22"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtInfoSongSinger"
+            app:layout_constraintTop_toBottomOf="@+id/txtSongName" />
+
+
+        <TextView
+            android:id="@+id/txtInfoSongArtist"
+            android:layout_width="@dimen/layout_75"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/txt_tacgia"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSize18"
+            app:layout_constraintBottom_toBottomOf="@+id/txtSongArtist"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txtSongArtist" />
+
+        <TextView
+            android:id="@+id/txtSongArtist"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/blank"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSize22"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtInfoSongArtist"
+            app:layout_constraintTop_toBottomOf="@+id/txtSongSinger" />
+
+        <TextView
+            android:id="@+id/txtCopyRight"
+            android:layout_width="@dimen/layout_300"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/layout_100"
+            android:gravity="center"
+            android:text="@string/text_banquyen"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSize22"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtSongArtist" />
+
+        <TextView
+            android:id="@+id/txtSkyMusic"
+            android:layout_width="@dimen/layout_200"
+            android:layout_height="wrap_content"
+            android:paddingEnd="0dp"
+            android:paddingStart="@dimen/layout_75"
+            android:text="@string/text_sky_music"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSize22"
+            app:layout_constraintTop_toBottomOf="@+id/txtCopyRight" />
+
+        <TextView
+            android:id="@+id/txtCopyRightSky"
+            android:layout_width="@dimen/layout_100"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/copyright_no"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSize22"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txtSkyMusic"
+            app:layout_constraintTop_toTopOf="@+id/txtSkyMusic" />
+
+        <TextView
+            android:id="@+id/txtVCPMC"
+            android:layout_width="@dimen/layout_200"
+            android:layout_height="wrap_content"
+            android:paddingEnd="0dp"
+            android:paddingStart="@dimen/layout_75"
+            android:text="@string/text_vcpmc"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSize22"
+            app:layout_constraintTop_toBottomOf="@+id/txtSkyMusic" />
+
+        <TextView
+            android:id="@+id/txtCopyRightVCPMC"
+            android:layout_width="@dimen/layout_100"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/copyright_no"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSize22"
+            app:layout_constraintStart_toStartOf="@id/txtCopyRightSky"
+            app:layout_constraintTop_toTopOf="@+id/txtVCPMC" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:constraint_referenced_ids="txtInfoSongName,txtSongName,
+        txtInfoSongSinger,txtSongSinger,txtInfoSongArtist,txtSongArtist,
+        txtCopyRight,txtSkyMusic,txtCopyRightSky,txtVCPMC,txtCopyRightVCPMC" />
+
+        <TextView
+            android:id="@+id/txtNoSong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/no_found_song"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSize24"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

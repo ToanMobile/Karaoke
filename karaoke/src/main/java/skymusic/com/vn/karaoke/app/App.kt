@@ -2,15 +2,13 @@ package skymusic.com.vn.karaoke.app
 
 import android.app.Activity
 import android.app.Application
-import android.arch.lifecycle.ProcessLifecycleOwner
+import android.net.TrafficStats
 import android.os.StrictMode
+import androidx.lifecycle.ProcessLifecycleOwner
 import com.blankj.utilcode.util.Utils
-import com.github.moduth.blockcanary.BlockCanary
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
-import com.squareup.leakcanary.LeakCanary
-import com.squareup.leakcanary.RefWatcher
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import skymusic.com.vn.karaoke.BuildConfig
@@ -27,7 +25,6 @@ class App : Application(), HasActivityInjector {
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
     override fun activityInjector() = dispatchingAndroidInjector
-    private var mRefWatcher: RefWatcher? = null
     private lateinit var appObserver: ForegroundBackgroundListener
 
     companion object {
@@ -35,18 +32,10 @@ class App : Application(), HasActivityInjector {
             private set
     }
 
-    fun getRefWatcher(): RefWatcher? {
-        return mRefWatcher
-    }
-
     override fun onCreate() {
         super.onCreate()
         AppInjector.init(this)
-        if (BuildConfig.DEBUG) {
-            strictMode()
-            setupLogger()
-            setupTest()
-        }
+        setupLogger()
         setupData()
     }
 
@@ -76,12 +65,7 @@ class App : Application(), HasActivityInjector {
 
     private fun setupData() {
         Utils.init(this)
-    }
-
-    private fun setupTest() {
-        if (LeakCanary.isInAnalyzerProcess(this)) return
-        mRefWatcher = LeakCanary.install(this)
-        BlockCanary.install(this, AppBlockCanaryContext()).start()
+        TrafficStats.setThreadStatsTag(10000)
     }
 
 }

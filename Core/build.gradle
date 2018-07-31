@@ -6,7 +6,6 @@ apply plugin: 'kotlin-allopen'
 
 android {
     compileSdkVersion build_versions.compileSdk
-    buildToolsVersion build_versions.build_tool
     defaultConfig {
         minSdkVersion build_versions.minSdk
         targetSdkVersion build_versions.targetSdk
@@ -60,35 +59,28 @@ dependencies {
     for (dependency in deps.core) {
         implementation dependency.value
     }
-    // Navigation
-    for (dependency in deps.navigation) {
-        implementation dependency.value
-    }
-    //Utils
-    for (dependency in deps.utils) {
-        implementation dependency.value
-    }
-    //Image Loading
-    for (dependency in deps.glide) {
-        implementation dependency.value
-    }
     // Architecture components
     for (dependency in deps.lifecycle) {
-        implementation dependency.value
-    }
-    //Retrofit
-    for (dependency in deps.retrofit) {
         implementation dependency.value
     }
     // Dagger 2
     for (dependency in deps.dagger) {
         implementation dependency.value
     }
-    // Test
-    implementation deps.test.leakcanary
-    releaseImplementation deps.test.leakcanary_no_op
-    testImplementation deps.test.leakcanary_no_op
-    implementation deps.test.blockDebug
-    releaseImplementation deps.test.blockRelease
+    //Compiler
+    for (dependency in deps.compiler) {
+        kapt dependency.value
+    }
+    //Retrofit
+    for (dependency in deps.retrofit) {
+        implementation dependency.value
+    }
+    implementation(deps.libCore.ok_httpLogging, {
+        exclude group: 'org.json', module: 'json'
+    })
+    //Image Loading
+    for (dependency in deps.glide) {
+        implementation dependency.value
+    }
 }
 

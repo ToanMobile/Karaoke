@@ -44,10 +44,11 @@ open class AppExecutors(
     @Inject
     constructor() : this(
             Executors.newSingleThreadExecutor(),
-            Executors.newFixedThreadPool(3),
+            Executors.newFixedThreadPool(8),
             MainThreadExecutor()
     )
 
+    //TODO change
     fun diskIO(): Executor {
         return diskIO
     }

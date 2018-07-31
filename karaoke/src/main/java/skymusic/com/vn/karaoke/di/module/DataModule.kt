@@ -15,8 +15,7 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun appExecutors(): AppExecutors {
+    internal fun appExecutors(): AppExecutors {
         return AppExecutors()
     }
-
 }

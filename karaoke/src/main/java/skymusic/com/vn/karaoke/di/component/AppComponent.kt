@@ -4,7 +4,10 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
 import skymusic.com.vn.karaoke.app.App
-import skymusic.com.vn.karaoke.di.module.*
+import skymusic.com.vn.karaoke.di.module.ActivityBuildersModule
+import skymusic.com.vn.karaoke.di.module.DataModule
+import skymusic.com.vn.karaoke.di.module.NetworkModule
+import skymusic.com.vn.karaoke.di.module.ViewModelModule
 import javax.inject.Singleton
 
 /**

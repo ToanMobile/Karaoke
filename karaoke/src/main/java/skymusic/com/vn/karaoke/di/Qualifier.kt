@@ -13,12 +13,4 @@ annotation class MainUrl
 
 @Qualifier
 @Retention(value = AnnotationRetention.RUNTIME)
-annotation class UpdateUrl
-
-@Qualifier
-@Retention(value = AnnotationRetention.RUNTIME)
-annotation class RssUrl
-
-@Qualifier
-@Retention(value = AnnotationRetention.RUNTIME)
-annotation class PmsUrl
+annotation class LogUrl

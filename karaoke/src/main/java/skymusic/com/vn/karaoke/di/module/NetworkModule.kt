@@ -13,6 +13,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import skymusic.com.vn.karaoke.BuildConfig
 import skymusic.com.vn.karaoke.data.service.ApiService
+import skymusic.com.vn.karaoke.data.service.LogApiService
+import skymusic.com.vn.karaoke.di.LogUrl
 import skymusic.com.vn.karaoke.di.MainUrl
 import javax.inject.Named
 import javax.inject.Singleton
@@ -51,8 +53,17 @@ class NetworkModule {
 
     @Singleton
     @Provides
+    fun sRestUpdateClient(@LogUrl retrofit: Retrofit): LogApiService = retrofit.create(LogApiService::class.java)
+
+    @Singleton
+    @Provides
     @MainUrl
     fun provideMainRetrofit(client: OkHttpClient): Retrofit = createRetrofit(client, BuildConfig.BASE_URL)
+
+    @Singleton
+    @Provides
+    @LogUrl
+    fun provideLogRetrofit(client: OkHttpClient): Retrofit = createRetrofit(client, BuildConfig.BASE_URL_LOG)
 
     @Singleton
     @Provides

@@ -1,6 +1,19 @@
 <resources>
 
-    <style name="Theme.AppTheme.TranslucentStatusBar" parent="Theme.AppCompat.Light.NoActionBar" />
+    <style name="AppTheme" parent="AppBaseTheme" />
+
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionBarStyle">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
     <declare-styleable name="RecorderButton">
         <attr name="txt_normal" format="string"/>
         <attr name="txt_recording" format="string"/>

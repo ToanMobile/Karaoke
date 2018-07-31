@@ -16,18 +16,13 @@
 
 package com.toan_itc.core.architecture
 
-import android.databinding.ViewDataBinding
-import android.support.v7.recyclerview.extensions.AsyncDifferConfig
-import android.support.v7.recyclerview.extensions.ListAdapter
-import android.support.v7.util.DiffUtil
-import android.view.ViewGroup
-
 /**
  * A generic RecyclerView adapter that uses Data Binding & DiffUtil.
  *
  * @param <T> Type of the items in the list
  * @param <V> The type of the ViewDataBinding
 </V></T> */
+/*
 
 abstract class DataBoundListAdapter<T, V : ViewDataBinding>(
         appExecutors: AppExecutors,
@@ -51,3 +46,4 @@ abstract class DataBoundListAdapter<T, V : ViewDataBinding>(
 
     protected abstract fun bind(binding: V, item: T)
 }
+*/
